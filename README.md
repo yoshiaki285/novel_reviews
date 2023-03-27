@@ -1,4 +1,4 @@
-# novel_review
+# novel_reviews
 
 ## サイト概要
 ### サイトテーマ
