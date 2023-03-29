@@ -13,40 +13,32 @@
   <body>
     
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <%= link_to 'recipegram', root_path, class: "navbar-brand" %>
+      <%= link_to 'NovelReviews', root_path, class: "navbar-brand" %>
       <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
         <span class="navbar-toggler-icon"></span>
       </button>
       
-      <% if user_signed_in? %>
-        <div class="collapse navbar-collapse" id="Navber">
-          <ul class="navbar-nav mr-auto">
+      
+      <div class="collapse navbar-collapse" id="Navber">
+        <ul class="navbar-nav mr-auto">
+          <% if user_signed_in? %>
             <li class="nav-item">
               <%= link_to 'マイページ', user_path, class: "nav-link" %>
             </li>
             <li class="nav-item">
-              <%= link_to '新規投稿', "#", class: "nav-link" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to '投稿一覧', "#", class: "nav-link" %>
-            </li>
-            <li class="nav-item">
               <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "nav-link" %>
             </li>
-          </ul>
-        </div>
-      <% else %>
-        <div class="collapse navbar-collapse" id="Navber">
-          <ul class="navbar-nav mr-auto">
+          <% else %>
             <li class="nav-item">
               <%= link_to 'ログイン', new_user_session_path, class: "nav-link" %>
             </li>
             <li class="nav-item">
               <%= link_to '新規登録', new_user_registration_path, class: "nav-link" %>
             </li>
-          </li>
+          <% end %>
         </ul>
-      <% end %>
+      </div>
+      
     </nav>
     <% if flash[:notice] %>
       <div class="alert alert-primary" role="alert"><strong><%= notice %></strong></div>
@@ -54,6 +46,14 @@
     <% if flash[:alert] %>
       <div class="alert alert-danger" role="alert"><strong><%= alert %></strong></div>
     <% end %>
+    <main>
     <%= yield %>
+    </main>
+    <!-- フッター -->
+  	<footer class="bg-dark text-white">
+  		<div class="container">
+  			<p class="text-center">&copy; 2023 小説レビューサイト</p>
+  		</div>
+  	</footer>
   </body>
 </html>
