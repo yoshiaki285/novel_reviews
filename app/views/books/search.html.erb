@@ -1,0 +1,46 @@
+<div class="col-lg-12">
+  <div class="hero-search-box d-flex">
+    <form class="d-flex">
+      <%= form_with url: books_search_path, method: :get do |f| %>
+        <%= f.text_field :title, class: "form-control me-2", placeholder: "小説を検索する" %>
+        <%= button_tag type: "submit", class: "btn btn-primary" do %>
+          <i class="fas fa-search"></i>
+        <% end %>
+      <% end %>
+    </form>
+  </div>
+</div>
+<!--検索結果を表示-->
+<% if @books %>
+  <div class="container">
+    <h1>検索結果</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>画像</th>
+          <th>タイトル</th>
+          <th>著者名</th>
+          <th>あらすじ</th>
+          <th></th>
+        </tr>
+      </thead>
+      <% @books.each do |book| %>
+        <!--検索結果に表示させたいデータを記述-->
+        <!--当画面では、画像、タイトル、著者名、あらすじを表示-->
+        <tbody>
+          <tr>
+            <td>
+              <%= link_to book_path(book.isbn) do %>
+                <%= image_tag book.medium_image_url %>
+              <% end %>
+            </td>
+            <td><h5><%= book.title %></h5></td>
+            <td><h6><%= book.author %></h6></td>
+            <td><p><%= book.item_caption %></p></td>
+            <td><%= link_to "詳細", book_path(book.isbn), class: "btn btn-primary" %></td>
+          </tr>
+        </tbody>
+      <% end %>
+    </table>
+  </div>
+<% end %>

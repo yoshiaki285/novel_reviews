@@ -7,7 +7,7 @@ class CreateBooks < ActiveRecord::Migration[6.1]
       t.string :publisher_name
       t.string :sales_date
       t.bigint :isbn, null: false, primary_key: true
-      t.string :middle_image_url
+      t.string :medium_image_url
       t.string :large_image_url
 
       t.timestamps
