@@ -8,18 +8,6 @@
         <div class="col-lg-6 p-0">
           <img src="https://dummyimage.com/600x400/000/fff" alt="人気小説" class="img-fluid position-relative">
         </div>
-        <div class="col-lg-12">
-          <div class="hero-search-box d-flex">
-            <form class="d-flex">
-              <%= form_with url: books_search_path, local: true, method: :get do |f| %>
-                <%= f.text_field :title, class: "form-control me-2", placeholder: "小説を検索する" %>
-                <%= button_tag type: "submit", class: "btn btn-primary" do %>
-                  <i class="fas fa-search"></i>
-                <% end %>
-              <% end %>
-            </form>
-          </div>
-        </div>
       </div>
     </div>
   </section>

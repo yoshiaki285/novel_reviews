@@ -1,0 +1,23 @@
+<div style="display: flex; align-items: center; flex-wrap: wrap;">
+  <div style="width: 100%; text-align: center;">
+    <h2><%= @book.title %> (<%= @book.publisher_name %>)</h2>
+    <p><%= @book.author %></p>
+    <hr style="width: 80%;">
+  </div>
+  <div style="width: 100%; margin-top: 20px; margin-bottom: 20px;">
+    <div style="display: flex; justify-content: space-between; margin-left: -16px; margin-right: -16px;">
+      <div class="col-3"></div>
+      <div class="col-3 d-flex flex-column justify-content-center align-items-center" style="padding: 0 16px;">
+        <%= image_tag @book.large_image_url %>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; margin-top: 10px;">
+          <button style="margin-right: 10px;">ブックマーク</button>
+          <button>読んだ</button>
+        </div>
+      </div>
+      <div class="col-4" style="padding: 0 16px;">
+        <p><%= @book.item_caption %></p>
+      </div>
+      <div class="col-2"></div>
+    </div>
+  </div>
+</div>
