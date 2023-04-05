@@ -9,4 +9,7 @@ class User < ApplicationRecord
   has_many :bookmarks, dependent: :destroy
   has_many :bookmark_books, through: :bookmarks, source: :book
   
+  def bookmarked_by?(user)
+    bookmarks.exists?(user_id: user.id)
+  end
 end
