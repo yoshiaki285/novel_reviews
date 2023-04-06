@@ -1,6 +1,6 @@
 class Book < ApplicationRecord
   self.primary_key = "isbn"
-  has_many :reviews, dependent: :destroy
+  has_many :reviews
   has_many :bookmarks
   
   def bookmarked_by?(user)
