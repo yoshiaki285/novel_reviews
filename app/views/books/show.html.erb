@@ -20,7 +20,7 @@
             <% end %>
           <% end %>
           <%= @book.bookmarks.count %>
-          <button>読んだ</button>
+          <%= link_to "読んだ", new_book_review_path(@book) %> 
         </div>
       </div>
       <div class="col-4" style="padding: 0 16px;">
