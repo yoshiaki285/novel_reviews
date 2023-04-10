@@ -4,18 +4,6 @@
       <p class="h4 mb-3">レビューを書く</p>
       <div class="rating-box mt-3">
         <%= form_with model: @review, url: book_reviews_path, local: true do |f| %>
-          <div class="main-rating d-flex mb-3">
-            <div class="ratings">
-              <span class="far fa-star" id="star" style="font-size: 30px; color: #fc0; cursor: pointer;"></span>
-              <span class="far fa-star" id="star" style="font-size: 30px; color: #fc0; cursor: pointer;"></span>
-              <span class="far fa-star" id="star" style="font-size: 30px; color: #fc0; cursor: pointer;"></span>
-              <span class="far fa-star" id="star" style="font-size: 30px; color: #fc0; cursor: pointer;"></span>
-              <span class="far fa-star" id="star" style="font-size: 30px; color: #fc0; cursor: pointer;"></span>
-            </div>
-            <div class="ml-3 rating-value-display"><span id="rating-value-display" style="font-size: 20px;">0</span>/5</div>
-          </div>
-          <%= f.hidden_field :book_id, value: @book.id %>
-          <%= f.hidden_field :rate, id: "rating-value" %>
           <div class="form-group">
             <%= f.text_area :review, class: "form-control" %>
           </div>
@@ -28,3 +16,4 @@
     </div>
   </div>
 </div>
+
