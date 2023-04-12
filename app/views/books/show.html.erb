@@ -39,14 +39,18 @@
           <div class="card-body">
             <h5 class="card-title mb-0"><%= review.user.name %>の感想・評価</h5>
             <p class="card-text"><small class="text-muted"><%= review.created_at.strftime('%Y年%m月%d日 %H:%M:%S') %></small></p>
-            <p class="card-text">
-              <a data-toggle="collapse" href="#collapseReview<%= review.id %>" role="button" aria-expanded="false" aria-controls="collapseReview<%= review.id %>" style="color: red;">
-                ネタバレを表示
-              </a>
-            </p>
-            <div class="collapse" id="collapseReview<%= review.id %>">
+            <% if review.is_exploded == true %>
+              <p class="card-text">
+                <a data-toggle="collapse" href="#collapseReview<%= review.id %>" role="button" aria-expanded="false" aria-controls="collapseReview<%= review.id %>" style="color: red;">
+                  ネタバレを表示
+                </a>
+              </p>
+              <div class="collapse" id="collapseReview<%= review.id %>">
+                <p class="card-text"><%= review.review %></p>
+              </div>
+            <% else %>
               <p class="card-text"><%= review.review %></p>
-            </div>
+            <% end %>
           </div>
         </div>
       <% end %>

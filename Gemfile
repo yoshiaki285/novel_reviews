@@ -60,3 +60,5 @@ gem 'devise'
 gem 'rakuten_web_service'
 
 gem "enum_help"
+
+gem 'pry-rails'

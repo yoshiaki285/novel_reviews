@@ -2,19 +2,16 @@
   <div class="row justify-content-center">
     <div class="col-md-8">
       <p class="h4 mb-3">レビューを書く</p>
-      <div class="rating-box mt-3">
+      <div class="review-box mt-3">
         <%= form_with model: @review, url: book_reviews_path, local: true do |f| %>
           <!-- レビュー本文入力欄 -->
           <div class="form-group">
             <%= f.text_area :review, class: "form-control" %>
           </div>
           <!--　ネタバレ防止スイッチ　-->
-          <div class="form-group form-check">
-            <%= f.label :status, class: 'form-check-label' do %>
-              <%= f.check_box :status, { checked: @review.content? }, :content, :spoiler %>
-              <span class="toggle"></span>
-              ネタバレ防止
-            <% end %>
+          <div class="form-group">
+            <%= f.label :is_exploded, 'ネタバレ防止機能：' %>
+            <%= f.check_box :is_exploded, { class: 'form-check-input', id: 'spoiler-switch', value: '1' }, true %>
           </div>
           <!-- 送信ボタン -->
           <div class="form-group text-left">

@@ -11,16 +11,19 @@ class ReviewsController < ApplicationController
   def create
     @book = Book.find(params[:book_id])
     @review = Review.new(review_params)
-    # binding.pry
-    @review.user_id = current_user.id
-    @review.book_id = @book.id
-    @review.status = params[:review][:status].to_i if params[:review][:status].present?
-    @review.save
-    redirect_to book_path(@book)
+    @review.user = current_user
+    @review.book = @book
+    binding.pry
+    if @review.save
+      redirect_to book_path(@book), notice: 'レビューを投稿しました。'
+    else
+      render 'new'
+    end
   end
+
   
   private
   def review_params
-    params.require(:review).permit(:book_id, :review, :status)
+    params.require(:review).permit(:review, :is_exploded, :book_id)
   end
 end
