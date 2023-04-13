@@ -10,17 +10,37 @@
       <div class="col-3 d-flex flex-column justify-content-center align-items-center" style="padding: 0 16px;">
         <%= image_tag @book.large_image_url %>
         <div style="display: flex; flex-wrap: wrap; justify-content: center; margin-top: 10px;">
-          <% if @book.bookmarked_by?(current_user) %>
-            <%= link_to book_bookmarks_path(@book), method: :delete do %>
-              <i class="fas fa-bookmark fa-lg"></i>
+          <% if user_signed_in? %>
+            <% if @book.bookmarked_by?(current_user) %>
+              <%= button_to book_bookmarks_path(@book), method: :delete do %>
+                <i class="fas fa-bookmark fa-lg"></i>
+              <% end %>
+            <% else %>
+              <%= button_to book_bookmarks_path(@book), method: :post do %>
+                <i class="far fa-bookmark fa-lg"></i>
+              <% end %>
             <% end %>
           <% else %>
-            <%= link_to book_bookmarks_path(@book), method: :post do %>
+            <%= link_to new_user_session_path do %>
               <i class="far fa-bookmark fa-lg"></i>
             <% end %>
           <% end %>
           <%= @book.bookmarks.count %>
-          <%= link_to "読んだ", new_book_review_path(@book) %> 
+          <% if user_signed_in? %>
+            <% if current_user.reviewed?(@book) %>
+              <%= link_to edit_book_review_path(@book) do %> 
+                <i class="fas fa-eye fa-lg"></i>
+              <% end %>
+            <% else %>
+              <%= link_to new_book_review_path(@book) do %> 
+                <i class="fas fa-eye fa-lg"></i>
+              <% end %>
+            <% end %>
+          <% else %>
+            <%= link_to new_user_session_path do %>
+              <i class="fas fa-eye fa-lg"></i>
+            <% end %>
+          <% end %>
         </div>
       </div>
       <div class="col-4" style="padding: 0 16px;">

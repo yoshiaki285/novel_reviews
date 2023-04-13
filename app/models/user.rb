@@ -12,4 +12,8 @@ class User < ApplicationRecord
   def bookmarked_by?(user)
     bookmarks.exists?(user_id: user.id)
   end
+  
+  def reviewed?(book)
+    reviews.exists?(book_id: book.id)
+  end
 end
