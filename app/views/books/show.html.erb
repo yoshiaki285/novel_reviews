@@ -28,7 +28,7 @@
           <%= @book.bookmarks.count %>
           <% if user_signed_in? %>
             <% if current_user.reviewed?(@book) %>
-              <%= link_to edit_book_review_path(@book) do %> 
+              <%= link_to edit_book_review_path(@book, @review) do %> 
                 <i class="fas fa-eye fa-lg"></i>
               <% end %>
             <% else %>

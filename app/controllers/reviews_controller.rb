@@ -1,4 +1,5 @@
 class ReviewsController < ApplicationController
+  before_action :set_book
   before_action :set_review, only: [:edit, :update, :destroy]
   
   def new
@@ -25,10 +26,10 @@ class ReviewsController < ApplicationController
   
   def edit
     # ログインユーザーとレビューの投稿者が一致するかチェック
-    unless current_user == @review.user
-      flash[:alert] = "You are not authorized to edit this review."
-      redirect_to @review.book and return
-    end
+    # unless current_user == @review.user
+    #   flash[:alert] = "You are not authorized to edit this review."
+    #   redirect_to @review.book and return
+    # end
   end
   
   def update
@@ -45,7 +46,11 @@ class ReviewsController < ApplicationController
     params.require(:review).permit(:review, :is_exploded, :book_id)
   end
   
+  def set_book
+    @book = Book.find(params[:book_id])
+  end
+
   def set_review
-    @review = Review.find(params[:id])
+    @review = @book.reviews.find(params[:id])
   end
 end

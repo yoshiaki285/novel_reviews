@@ -28,7 +28,8 @@ class BooksController < ApplicationController
   
   def show
     @book = Book.find(params[:id])
-    @review = Review.new
+    @review = current_user.reviews.find_by(book: @book)
+    @review ||= Review.new(book: @book)
   end
   
   # 読みたい本リストを表示するためのメソッド
