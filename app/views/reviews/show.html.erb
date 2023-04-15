@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title mb-0"><%= @book.title %>の<%= @review.user.name %>の感想・評価</h5>
+          <p class="card-text"><small class="text-muted"><%= @review.created_at.strftime('%Y年%m月%d日 %H:%M:%S') %></small></p>
+          <% if @review.is_exploded == true %>
+            <p class="card-text">
+              <a data-toggle="collapse" href="#collapseReview<%= @review.id %>" role="button" aria-expanded="false" aria-controls="collapseReview<%= @review.id %>" style="color: red;">
+                ネタバレを表示
+              </a>
+            </p>
+            <div class="collapse" id="collapseReview<%= @review.id %>">
+              <p class="card-text"><%= @review.review %></p>
+            </div>
+          <% else %>
+            <p class="card-text"><%= @review.review %></p>
+          <% end %>
+        </div>
+        <div class="card-footer">
+          <%= form_with model: [@book, @review, @review.comments.build ], local: true do |f| %>
+            <!--　ネタバレ防止スイッチ　-->
+            <%= f.label :is_exploded_c, 'ネタバレ防止機能：' %>
+            <%= f.check_box :is_exploded_c %>
+            <!-- コメント入力 -->
+            <%= f.text_field :comment, placeholder: "コメントを入力してください" %>
+            <!-- 送信 -->
+            <%= f.submit "送信", class: "btn btn-primary mt-2" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <% @review.comments.each do |comment| %>
+        <% if comment.user.present? %>
+          <div class="card mb-3">
+            <div class="card-body">
+              <h5 class="card-title mb-0"><%= comment.user.name %>の感想・評価</h5>
+              <p class="card-text"><small class="text-muted"><%= comment.created_at.strftime('%Y年%m月%d日 %H:%M:%S') %></small></p>
+              <% if comment.is_exploded_c == true %>
+                <p class="card-text">
+                  <a data-toggle="collapse" href="#collapseReview<%= comment.id %>" role="button" aria-expanded="false" aria-controls="collapseReview<%= comment.id %>" style="color: red;">
+                    ネタバレを表示
+                  </a>
+                </p>
+                <div class="collapse" id="collapseReview<%= comment.id %>">
+                  <p class="card-text"><%= comment.comment %></p>
+                </div>
+              <% else %>
+                <p class="card-text"><%= comment.comment %></p>
+              <% end %>
+              <% if current_user == @review.user || current_user == comment.user %>
+                <%= form_with(url: book_review_comment_path(@book, @review, comment), method: :delete, local: true) do |form| %>
+                  <%= form.hidden_field :comment_id, value: comment.id %>
+                  <%= form.button type: :submit, class: "btn btn-danger btn-sm" do %>
+                    <i class="far fa-trash-alt"></i>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -71,6 +71,9 @@
             <% else %>
               <p class="card-text"><%= review.review %></p>
             <% end %>
+            <%= link_to book_review_path(@book, @review) do %>
+              <i class="far fa-comment"></i>コメントする
+            <% end %>
           </div>
         </div>
       <% end %>

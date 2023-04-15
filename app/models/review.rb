@@ -1,6 +1,7 @@
 class Review < ApplicationRecord
   belongs_to :user
   belongs_to :book, primary_key: "isbn"
+  has_many :comments, dependent: :destroy
   
   validate :unique_user_review, on: :create
   

@@ -6,6 +6,7 @@ class User < ApplicationRecord
   validates :name, presence: true
   
   has_many :reviews, dependent: :destroy
+  has_many :comments, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
   has_many :bookmark_books, through: :bookmarks, source: :book
   
