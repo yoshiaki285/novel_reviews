@@ -21,11 +21,16 @@ class ReviewsController < ApplicationController
   end
   
   def index
-    
+    @reviews = Review.all
+  end
+  
+  def destroy
+    @review.delete
+    redirect_to book_path(@book), notice: 'Review was successfully deleted.'
   end
   
   def show
-    # @comment = Comment.new
+    @comment = Comment.new
   end 
   
   def edit
@@ -47,7 +52,7 @@ class ReviewsController < ApplicationController
   private
   
   def review_params
-    params.require(:review).permit(:review, :is_exploded, :book_id)
+    params.require(:review).permit(:review, :is_exploded, :book_id).merge(created_at: Time.zone.now)
   end
   
   def set_book

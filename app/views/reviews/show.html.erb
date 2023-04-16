@@ -1,7 +1,7 @@
 <div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="card mb-3">
+  <div class="card mb-3">
+    <div class="row">
+      <div class="col-md-8">
         <div class="card-body">
           <h5 class="card-title mb-0"><%= @book.title %>の<%= @review.user.name %>の感想・評価</h5>
           <p class="card-text"><small class="text-muted"><%= @review.created_at.strftime('%Y年%m月%d日 %H:%M:%S') %></small></p>
@@ -18,15 +18,24 @@
             <p class="card-text"><%= @review.review %></p>
           <% end %>
         </div>
+      </div>
+      <div class="col-md-4">
+        <%= link_to book_path(@book.isbn) do %>
+          <%= image_tag @book.large_image_url, class: "img-thumbnail" %>
+        <% end %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
         <div class="card-footer">
           <%= form_with model: [@book, @review, @review.comments.build ], local: true do |f| %>
             <!--　ネタバレ防止スイッチ　-->
-            <%= f.label :is_exploded_c, 'ネタバレ防止機能：' %>
+            <%= f.label :is_exploded_c, 'ネタバレ防止：' %>
             <%= f.check_box :is_exploded_c %>
             <!-- コメント入力 -->
             <%= f.text_field :comment, placeholder: "コメントを入力してください" %>
             <!-- 送信 -->
-            <%= f.submit "送信", class: "btn btn-primary mt-2" %>
+            <%= f.submit "送信", class: "btn btn-primary" %>
           <% end %>
         </div>
       </div>

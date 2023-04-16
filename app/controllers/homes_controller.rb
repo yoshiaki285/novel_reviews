@@ -1,5 +1,5 @@
 class HomesController < ApplicationController
-  def top
-    
+  def index
+    @reviews = Review.all
   end
 end

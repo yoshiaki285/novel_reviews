@@ -12,32 +12,31 @@
         <div style="display: flex; flex-wrap: wrap; justify-content: center; margin-top: 10px;">
           <% if user_signed_in? %>
             <% if @book.bookmarked_by?(current_user) %>
-              <%= button_to book_bookmarks_path(@book), method: :delete do %>
+              <%= button_to book_bookmarks_path(@book), method: :delete, class: "btn btn-primary btn-block rounded-0" do %>
                 <i class="fas fa-bookmark fa-lg"></i>
               <% end %>
             <% else %>
-              <%= button_to book_bookmarks_path(@book), method: :post do %>
-                <i class="far fa-bookmark fa-lg"></i>
+              <%= button_to book_bookmarks_path(@book), class: "btn btn-light btn-block rounded-0" do %>
+                <i class="far fa-bookmark fa-lg" style="opacity: 0.5;"></i>
               <% end %>
             <% end %>
           <% else %>
-            <%= link_to new_user_session_path do %>
-              <i class="far fa-bookmark fa-lg"></i>
+            <%= button_to new_user_session_path,method: :get, class: "btn btn-light btn-block rounded-0" do %>
+              <i class="far fa-bookmark fa-lg" style="opacity: 0.5;"></i>
             <% end %>
           <% end %>
-          <%= @book.bookmarks.count %>
           <% if user_signed_in? %>
             <% if current_user.reviewed?(@book) %>
-              <%= link_to edit_book_review_path(@book, @review) do %> 
+              <%= button_to edit_book_review_path(@book, @review),method: :get, class: "btn btn-primary btn-block rounded-0" do %> 
                 <i class="fas fa-eye fa-lg"></i>
               <% end %>
             <% else %>
-              <%= link_to new_book_review_path(@book) do %> 
+              <%= button_to new_book_review_path(@book),method: :get, class: "btn btn-light btn-block rounded-0" do %> 
                 <i class="fas fa-eye fa-lg"></i>
               <% end %>
             <% end %>
           <% else %>
-            <%= link_to new_user_session_path do %>
+            <%= button_to new_user_session_path,method: :get, class: "btn btn-light btn-block rounded-0" do %>
               <i class="fas fa-eye fa-lg"></i>
             <% end %>
           <% end %>
@@ -71,7 +70,7 @@
             <% else %>
               <p class="card-text"><%= review.review %></p>
             <% end %>
-            <%= link_to book_review_path(@book, @review) do %>
+            <%= link_to book_review_path(@book, review) do %>
               <i class="far fa-comment"></i>コメントする
             <% end %>
           </div>

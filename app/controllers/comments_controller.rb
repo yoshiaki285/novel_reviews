@@ -14,15 +14,14 @@ class CommentsController < ApplicationController
   def destroy
     @comment = Comment.find(params[:id])
     @review = @comment.review
-    @comment.destroy
-    flash[:success] = "Comment was successfully deleted"
-    redirect_to book_review_path(@review.book.isbn, @review.id)
+    @comment.delete
+    redirect_to book_review_path(@review.book.isbn, @review.id), notive: "Comment was successfully deleted"
   end
   
   private
   
   def comment_params
-    params.require(:comment).permit(:comment, :is_exploded_c)
+    params.require(:comment).permit(:comment, :is_exploded_c).merge(created_at: Time.zone.now)
   end
   
 end

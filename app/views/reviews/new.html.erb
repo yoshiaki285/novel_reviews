@@ -10,8 +10,8 @@
           </div>
           <!--　ネタバレ防止スイッチ　-->
           <div class="form-group">
-            <%= f.label :is_exploded, 'ネタバレ防止機能：' %>
-            <%= f.check_box :is_exploded, { class: 'form-check-input', id: 'spoiler-switch', value: '1' }, true %>
+            <%= f.label :is_exploded, 'ネタバレ防止：', class: 'form-check-label', for: 'spoiler-switch' %>
+            <%= f.check_box :is_exploded, { class: 'form-check-input ml-1', id: 'spoiler-switch', value: '1' }, true %>
           </div>
           <!-- 送信ボタン -->
           <div class="form-group text-left">
