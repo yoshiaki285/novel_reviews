@@ -8,8 +8,14 @@
         <% end %>
         <div class="card-body text-center">
           <p class="card-text">
-            <%= link_to book_review_path(book, book.review), class: "btn btn-info" do %>
-              <i class="far fa-comments"></i>
+            <% if book.reviews.any? %>
+              <%= link_to book_review_path(book, book.reviews), class: "btn btn-info" do %>
+                <i class="far fa-comments"></i>
+              <% end %>
+            <% else %>
+              <span class="btn btn-secondary disabled">
+                <i class="far fa-comments"></i>
+              </span>
             <% end %>
           </p>
         </div>

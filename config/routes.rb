@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
+  devise_for :admin, skip: [:registrations, :passwords], controllers: {
+    sessions: "admin/sessions"
+  }
   root to: 'homes#index'
   get 'books/search' => "books#search"
   devise_for :users, controllers: {
     registrations: 'users/registrations',
-    passwords: 'users/passwords'
+    passwords: 'users/passwords',
+    sessions: 'users/sessions'
   }
   devise_scope :user do
     post '/users/guest_sign_in' => 'users/sessions#guest_sign_in'
