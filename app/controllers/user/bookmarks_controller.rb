@@ -1,4 +1,4 @@
-class BookmarksController < ApplicationController
+class User::BookmarksController < ApplicationController
   def create
     @bookmark = current_user.bookmarks.create(book_id: params[:book_id])
     redirect_back(fallback_location: root_path)

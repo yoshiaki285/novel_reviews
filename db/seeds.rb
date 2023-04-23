@@ -5,8 +5,21 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-User.create!(
-  name: 'aaa',
-  email: 'aaa@mail.com',
-  password: '123456'
-)
+begin
+  User.create!(
+    name: 'aaa',
+    email: 'aaa@mail.com',
+    password: '123456'
+  )
+rescue Exception => e
+  puts "Error creating user: #{e.message}"
+end
+
+begin
+  Admin.create!(
+    email: 'admin@mail.com',
+    password: '123456'
+  )
+rescue Exception => e
+  puts "Error creating admin: #{e.message}"
+end

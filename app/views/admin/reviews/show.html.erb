@@ -1,0 +1,60 @@
+コメント管理
+<div class="container mt-5">
+  <div class="card mb-3">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title mb-0"><%= @review.book.title %>の<%= @review.user.name %>の感想・評価</h5>
+          <p class="card-text"><small class="text-muted"><%= @review.created_at.strftime('%Y年%m月%d日 %H:%M:%S') %></small></p>
+          <% if @review.is_exploded == true %>
+            <p class="card-text">
+              <a data-toggle="collapse" href="#collapseReview<%= @review.id %>" role="button" aria-expanded="false" aria-controls="collapseReview<%= @review.id %>" style="color: red;">
+                ネタバレを表示
+              </a>
+            </p>
+            <div class="collapse" id="collapseReview<%= @review.id %>">
+              <p class="card-text"><%= @review.review %></p>
+            </div>
+          <% else %>
+            <p class="card-text"><%= @review.review %></p>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <%= image_tag @review.book.large_image_url, class: "img-thumbnail" %>
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-md-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ユーザー</th>
+            <th>コメント内容</th>
+            <th>ネタバレ防止</th>
+            <th>削除</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @review.comments.each do |comment|%>
+            <tr>
+              <td><%= comment.user.name.chars.each_slice(6).map(&:join).join("<br>").html_safe %></td>
+              <td><%= comment.comment.chars.each_slice(30).map(&:join).join("<br>").html_safe %></td>
+              <td>
+                <% if comment.is_exploded_c %>
+                  <span class="badge badge-warning">あり</span>
+                <% else %>
+                  <span class="badge badge-success">なし</span>
+                <% end %>
+              </td>
+              <td>
+                <%= button_to "削除", admin_review_comment_path(@review, comment), method: :delete, class: "btn btn-danger" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

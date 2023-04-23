@@ -1,4 +1,4 @@
-class BooksController < ApplicationController
+class User::BooksController < ApplicationController
   
   def search
     # 空の配列を作成

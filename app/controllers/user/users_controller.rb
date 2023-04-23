@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class User::UsersController < ApplicationController
   def show
     @reviews = current_user.reviews
   end
