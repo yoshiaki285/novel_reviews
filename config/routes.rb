@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   
   scope module: :user do
     get 'books/search' => "books#search"
+    get 'books/search_genre' => "books#search_genre"
     resources :books, only: [:show] do
       resources :reviews do
         resources :comments, only: [:create, :destroy]

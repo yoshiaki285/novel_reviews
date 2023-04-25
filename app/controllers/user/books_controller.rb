@@ -26,6 +26,22 @@ class User::BooksController < ApplicationController
     end
   end
   
+  def search_genre
+    # 空の配列を作成
+    @books = []
+    @genre_id = params[:genreId]
+    if @genre_id.present?
+      results = RakutenWebService::Books::Book.search({
+        booksGenreId: @genre_id,
+      })
+      results.each do |result|
+        book = Book.new(extract(result))
+        @books << book
+      end
+    end
+    
+  end
+  
   def show
     @book = Book.find(params[:id])
     @review = current_user.reviews.find_by(book: @book)
