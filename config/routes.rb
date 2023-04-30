@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   }
   
   devise_scope :user do
+    get '/user/edit' => 'user/users#edit'
     post '/user/guest_sign_in' => 'user/sessions#guest_sign_in'
   end
   
@@ -19,9 +20,6 @@ Rails.application.routes.draw do
         get :bookmarks
       end
     end
-  end
-  
-  scope module: :user do
     get 'books/search' => "books#search"
     get 'books/search_genre' => "books#search_genre"
     resources :books, only: [:show] do
@@ -30,18 +28,13 @@ Rails.application.routes.draw do
       end
       resource :bookmarks, only: [:create, :destroy]
     end
-  end
-  
-  scope module: :user do
     root to: 'homes#index'
   end
 
   # Admin
   namespace :admin do
     get '/index' => 'homes#index'
-  end
   
-  namespace :admin do
     resources :reviews, only: [:show,:destroy] do
       resources :comments, only: [:destroy]
     end

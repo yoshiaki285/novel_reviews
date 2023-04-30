@@ -62,9 +62,9 @@
                 <p class="card-text"><%= comment.comment %></p>
               <% end %>
               <% if current_user == @review.user || current_user == comment.user %>
-                <%= form_with(url: book_review_comment_path(@book, @review, comment), method: :delete, local: true) do |form| %>
-                  <%= form.hidden_field :comment_id, value: comment.id %>
-                  <%= form.button type: :submit, class: "btn btn-danger btn-sm" do %>
+                <%= form_with(url: book_review_comment_path(@book, @review, comment), method: :delete, local: true) do |f| %>
+                  <%= f.hidden_field :comment_id, value: comment.id %>
+                  <%= f.button type: :submit, class: "btn btn-danger btn-sm" do %>
                     <i class="far fa-trash-alt"></i>
                   <% end %>
                 <% end %>

@@ -3,7 +3,7 @@
     <div class="col-md-8">
       <p class="h4 mb-3">レビュー</p>
       <div class="review-box mt-3">
-        <%= form_with model: @review, url: book_review_path, local: true, method: :patch do |f| %>
+        <%= form_with model: [@book, @review], url: book_review_path(@book, @review), local: true, method: :patch do |f| %>
           <!-- レビュー本文入力欄 -->
           <div class="form-group">
             <%= f.text_area :review, class: "form-control" %>
@@ -15,8 +15,7 @@
           </div>
           <!-- 送信ボタン -->
           <div class="form-group text-left">
-            <%= f.submit "更新", class: "btn btn-primary" %>
-            <%= button_to "削除", book_review_path, method: :delete, class: "btn btn-secondary" %>
+            <%= f.submit "更新", name: 'update', class: "btn btn-primary mr-1" %>
           </div>
         <% end %>
       </div>
