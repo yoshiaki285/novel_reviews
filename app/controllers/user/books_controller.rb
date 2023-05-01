@@ -32,11 +32,17 @@ class User::BooksController < ApplicationController
     @genre_id = params[:genreId]
     if @genre_id.present?
       results = RakutenWebService::Books::Book.search({
-        booksGenreId: @genre_id,
+        booksGenreId: @genre_id
       })
       results.each do |result|
         book = Book.new(extract(result))
         @books << book
+      end
+    end
+    
+    @books.each do |book|
+      unless Book.all.include?(book)
+        book.save
       end
     end
     

@@ -1,26 +1,27 @@
 <%= render 'show' %>
-<div class="row justify-content-center">
-  <% current_user.bookmark_books.each do |book| %>
-    <div class="col-md-1 mb-3 mx-auto">
-      <div class="text-center">
-        <%= link_to book_path(book.isbn) do %>
-          <%= image_tag book.medium_image_url %>
-        <% end %>
-        <div class="card-body text-center">
-          <p class="card-text">
-            <% if book.reviews.any? %>
-              <%= link_to book_review_path(book, book.reviews), class: "btn btn-info" do %>
-                <i class="far fa-comments"></i>
+<div class="col-7 mx-auto">
+  <div class="d-flex justify-content-center flex-wrap">
+    <% current_user.bookmark_books.each do |book| %>
+      <div class="mx-2 mb-3">
+        <div class="text-center">
+          <%= link_to book_path(book.isbn) do %>
+            <%= image_tag book.medium_image_url %>
+          <% end %>
+          <div class="card-body text-center">
+            <p class="card-text">
+              <% if book.reviews.any? %>
+                <%= link_to book_review_path(book, book.reviews), class: "btn btn-info" do %>
+                  <i class="far fa-comments"></i>
+                <% end %>
+              <% else %>
+                <span class="btn btn-secondary disabled">
+                  <i class="far fa-comments"></i>
+                </span>
               <% end %>
-            <% else %>
-              <span class="btn btn-secondary disabled">
-                <i class="far fa-comments"></i>
-              </span>
-            <% end %>
-          </p>
+            </p>
+          </div>
         </div>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>
-
