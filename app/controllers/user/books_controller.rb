@@ -1,5 +1,7 @@
 class User::BooksController < ApplicationController
   
+  before_action :autheticate_user!, except: [:show]
+  
   def search
     # 空の配列を作成
     @books = []
