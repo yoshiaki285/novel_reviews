@@ -28,14 +28,18 @@
     <div class="row">
       <div class="col-md-12">
         <div class="card-footer">
-          <%= form_with model: [@book, @review, @review.comments.build ], local: true do |f| %>
+          <%= form_with model: [@book, @review, @review.comments.build ], local: true, authenticity_token: true do |f| %>
             <!--　ネタバレ防止スイッチ　-->
             <%= f.label :is_exploded_c, 'ネタバレ防止：' %>
             <%= f.check_box :is_exploded_c %>
             <!-- コメント入力 -->
             <%= f.text_field :comment, placeholder: "コメントを入力してください" %>
             <!-- 送信 -->
-            <%= f.submit "送信", class: "btn btn-primary" %>
+            <% if current_user %>
+              <%= f.submit "送信", class: "btn btn-primary" %>
+            <% else %>
+              <%= link_to "送信", new_user_session_path, class: "btn btn-primary" %>
+            <% end %>
           <% end %>
         </div>
       </div>
