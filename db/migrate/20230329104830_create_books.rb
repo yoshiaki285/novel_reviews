@@ -3,7 +3,7 @@ class CreateBooks < ActiveRecord::Migration[6.1]
     create_table :books, id: false do |t|
       t.string :title
       t.string :author
-      t.string :item_caption, limit: 255
+      t.text :item_caption
       t.string :publisher_name
       t.string :sales_date
       t.bigint :isbn, null: false, primary_key: true
