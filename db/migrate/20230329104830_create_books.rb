@@ -1,9 +1,9 @@
 class CreateBooks < ActiveRecord::Migration[6.1]
   def change
-    create_table :books,id: false do |t|
+    create_table :books, id: false do |t|
       t.string :title
       t.string :author
-      t.string :item_caption
+      t.string :item_caption, limit: 255
       t.string :publisher_name
       t.string :sales_date
       t.bigint :isbn, null: false, primary_key: true
