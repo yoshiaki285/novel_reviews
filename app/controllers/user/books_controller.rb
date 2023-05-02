@@ -1,6 +1,6 @@
 class User::BooksController < ApplicationController
   
-  before_action :authenticate_user!, except: [:show]
+  before_action :authenticate_user!, except: [:show, :search, :search_genre]
   
   def search
     # 空の配列を作成
