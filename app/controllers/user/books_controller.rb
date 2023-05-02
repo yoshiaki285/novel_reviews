@@ -52,7 +52,9 @@ class User::BooksController < ApplicationController
   
   def show
     @book = Book.find(params[:id])
-    @review = current_user.reviews.find_by(book: @book)
+    if current_user
+      @review = current_user.reviews.find_by(book: @book)
+    end
     @review ||= Review.new(book: @book)
   end
   
