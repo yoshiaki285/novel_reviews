@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 2023_04_20_114130) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "book_id"
+    t.bigint "book_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 2023_04_20_114130) do
   create_table "books", primary_key: "isbn", force: :cascade do |t|
     t.string "title"
     t.string "author"
-    t.string "item_caption"
+    t.text "item_caption"
     t.string "publisher_name"
     t.string "sales_date"
     t.string "medium_image_url"
